@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+//create a user
 export const createUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -23,7 +24,7 @@ export const createUser = async (req, res) => {
     res.status(500).json({ error: true });
   }
 };
-
+//get all information
 export const getAllInformation = async (req, res) => {
   try {
     const allInformation = await prisma.user.findMany({
@@ -51,6 +52,7 @@ export const getAllInformation = async (req, res) => {
   }
 };
 
+//get list of user
 export const getListUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -75,11 +77,7 @@ export const getListUser = async (req, res) => {
   }
 };
 
-const user = {
-  username: "email@test.com",
-  password: "secret",
-};
-
+// generate token
 export const generateToken = (req, res) => {
   try {
     const { user } = req.body;

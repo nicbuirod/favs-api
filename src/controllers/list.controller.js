@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+//create a list
 export const createList = async (req, res) => {
   try {
     const newList = await prisma.list.create({
@@ -13,6 +14,7 @@ export const createList = async (req, res) => {
   }
 };
 
+//get all list
 export const getAllList = async (req, res) => {
   try {
     const allList = await prisma.list.findMany();

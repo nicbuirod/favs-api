@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+//create a favorite
 export const createFavs = async (req, res) => {
   try {
     const newFavs = await prisma.favs.create({
