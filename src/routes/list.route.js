@@ -4,18 +4,19 @@ import {
   getAllList,
   listDelete,
 } from "../controllers/list.controller.js";
+import { verifyToken } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
 //routes
 
 //create new list
-router.post("/", createList);
+router.post("/", verifyToken, createList);
 
 //get all list
-router.get("/", getAllList);
+router.get("/", verifyToken, getAllList);
 
 //delete a list
-router.delete("/:id", listDelete);
+router.delete("/:id", verifyToken, listDelete);
 
 export default router;

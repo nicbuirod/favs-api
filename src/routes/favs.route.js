@@ -1,14 +1,22 @@
 import express from "express";
-import { createFavs, favsDelete } from "../controllers/favs.controller.js";
+import {
+  createFavs,
+  favsDelete,
+  favoriteUpdate,
+} from "../controllers/favs.controller.js";
+import { verifyToken } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
 //routes
 
 //create new list
-router.post("/", createFavs);
+router.post("/", verifyToken, createFavs);
 
 //delete a favorite
-router.delete("/:id", favsDelete);
+router.delete("/:id", verifyToken, favsDelete);
+
+//update a favorite
+router.put("/:id", favoriteUpdate);
 
 export default router;

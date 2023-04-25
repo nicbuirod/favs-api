@@ -31,6 +31,6 @@ model list {
 model user {
   iduser   Int    @id @unique(map: "iduser_UNIQUE") @default(autoincrement())
   email    String @db.VarChar(100)
-  password String @db.VarChar(45)
+  password String @db.VarChar(255)
   list     list[]
 }

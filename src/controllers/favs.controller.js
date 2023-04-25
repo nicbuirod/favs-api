@@ -29,3 +29,22 @@ export const favsDelete = async (req, res) => {
     res.status(500).json({ error: true });
   }
 };
+
+//update a favorite
+
+export const favoriteUpdate = async (req, res) => {
+  console.log("en favs");
+  try {
+    const { id } = req.params;
+
+    const favorite = await prisma.favs.update({
+      where: {
+        idfavs: +id,
+      },
+      data: req.body,
+    });
+    res.json(favorite);
+  } catch (error) {
+    res.status(500).json({ error: true });
+  }
+};
