@@ -6,12 +6,19 @@ import bcrypt from "bcrypt";
 export const createUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const hash = bcrypt.hashSync(password, 12);
-    const newUser = await prisma.user.create({
-      data: { email, password: hash },
-    });
+    const passwordTest = /(?=.*\d)(?=.*[a-zA-Z])(?=.*[@$!%*?&])(^.{8,}$)/;
+    if (passwordTest.test(password)) {
+      const hash = bcrypt.hashSync(password, 12);
+      const newUser = await prisma.user.create({
+        data: { email, password: hash },
+      });
 
-    res.status(201).json(newUser);
+      res.status(201).json(newUser);
+    } else {
+      res.json(
+        "La contraseña debe tener al menos 8 caracteres, una letra mayúscula o minúscula, un dígito y un caracter especial como @$!%*?&"
+      );
+    }
   } catch (error) {
     res.status(500).json({ error: true });
   }
