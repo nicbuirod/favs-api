@@ -13,7 +13,7 @@ const router = express.Router();
 //routes
 
 //create new user
-router.post("/", verifyToken, createUser);
+router.post("/", createUser);
 
 //get all information
 router.get("/", verifyToken, getAllInformation);

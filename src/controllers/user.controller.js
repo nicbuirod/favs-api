@@ -93,6 +93,7 @@ export const generateToken = (req, res) => {
 //middleware login
 export const login = async (req, res, next) => {
   const { username: email, password } = req.body;
+  console.log("en login");
 
   try {
     const user = await prisma.user.findFirst({
