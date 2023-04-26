@@ -79,21 +79,21 @@ export const getListUser = async (req, res) => {
 
 // generate token
 export const generateToken = (req, res) => {
+  SECRET = "$2a$12$KzT39VZJef7fRta.o/WVrOUOEJVIdPhXXFHAEoEtn/IPrU6fvFqwi";
   try {
     const { user } = req.body;
     const payload = { ...user };
-    const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "24h" });
+    const token = jwt.sign(payload, SECRET, { expiresIn: "24h" });
     res.status(200).json({ ...user, token });
   } catch (error) {
     console.log(error);
-    res.status(500).json("en generar");
+    res.status(500).json({ error });
   }
 };
 
 //middleware login
 export const login = async (req, res, next) => {
   const { username: email, password } = req.body;
-  console.log("en login");
 
   try {
     const user = await prisma.user.findFirst({
@@ -104,13 +104,12 @@ export const login = async (req, res, next) => {
 
     const isValidUser = bcrypt.compareSync(password, user.password);
     if (isValidUser) {
-      console.log("valido");
       next();
     } else {
       res.status(401).json("user o password is not valid");
     }
   } catch (error) {
-    res.status(500).json({ error: true, error, text: "error en login" });
+    res.status(500).json({ error: true });
   }
 };
 
