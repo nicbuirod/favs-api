@@ -110,7 +110,7 @@ export const login = async (req, res, next) => {
       res.status(401).json("user o password is not valid");
     }
   } catch (error) {
-    res.status(500).json({ error: true });
+    res.status(500).json({ error: true, error, text: "error en login" });
   }
 };
 
