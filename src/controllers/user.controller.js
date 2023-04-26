@@ -86,7 +86,7 @@ export const generateToken = (req, res) => {
     res.status(200).json({ ...user, token });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: true });
+    res.status(500).json("en generar");
   }
 };
 
