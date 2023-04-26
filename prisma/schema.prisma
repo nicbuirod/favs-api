@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model favs {
+  idfavs      Int     @id @default(autoincrement())
+  title       String? @db.VarChar(100)
+  description String? @db.VarChar(255)
+  link        String? @db.VarChar(255)
+  idlist      Int
+  list        list    @relation(fields: [idlist], references: [idlist], onDelete: Cascade, onUpdate: NoAction, map: "fk_favs_list1")
+
+  @@index([idlist], map: "fk_favs_list1_idx")
+}
+
+model list {
+  idlist Int    @id @default(autoincrement())
+  name   String @db.VarChar(45)
+  iduser Int
+  favs   favs[]
+  user   user   @relation(fields: [iduser], references: [iduser], onDelete: Cascade, onUpdate: NoAction, map: "fk_list_user")
+
+  @@index([iduser], map: "fk_list_user_idx")
+}
+
+model user {
+  iduser   Int    @id @unique(map: "iduser_UNIQUE") @default(autoincrement())
+  email    String @db.VarChar(100)
+  password String @db.VarChar(255)
+  list     list[]
+}
