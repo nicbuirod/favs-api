@@ -115,11 +115,12 @@ export const login = async (req, res, next) => {
 
 //middleware verify token
 export const verifyToken = (req, res, next) => {
+  const SECRET = "$2a$12$KzT39VZJef7fRta.o/WVrOUOEJVIdPhXXFHAEoEtn/IPrU6fvFqwi";
   const token = req.header("Authorization").split(" ")[1];
 
   console.log(token);
   try {
-    const decoded = jwt.verify(token, process.env.SECRET);
+    const decoded = jwt.verify(token, SECRET);
     console.log(decoded);
     const { exp: expDate } = decoded;
     //expired?
