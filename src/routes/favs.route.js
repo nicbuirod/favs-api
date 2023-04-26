@@ -17,6 +17,6 @@ router.post("/", verifyToken, createFavs);
 router.delete("/:id", verifyToken, favsDelete);
 
 //update a favorite
-router.put("/:id", favoriteUpdate);
+router.put("/:id", verifyToken ,favoriteUpdate);
 
 export default router;
