@@ -18,7 +18,7 @@ app.use(express.json());
 // user
 app.use("/user", userRoutes);
 
-//list
+// list
 app.use("/list", listRoutes);
 
 //favs
