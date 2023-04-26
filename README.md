@@ -6,20 +6,20 @@
 The api is deployed in railway at the following URL: https://favs-api-production.up.railway.app/
 The following table lists the different end points that you can use:
 
-| Route       | HTTP Verb | Route Middleware | Description                                |
-| ----------- | --------- | ---------------- | ------------------------------------------ |
-| /user       | POST      |                  | Create a new user                          |
-| /user       | GET       | verifyToken()    | Get all information of all user            |
-| /user/:id   | GET       | verifyToken()    | Get list for only one user by id            |
-| /user/login | POST      |                  | Validate password and generate token       |
-| /list       | POST      | verifyToken()    | Create new list to user                     |
-| /list       | GET       | verifyToken()    | Get all list of every user                  |
-| /list       | DELETE    | verifyToken()    | Delete a list by id                         |
-| /favs       | POST      | verifyToken()    | Create a new favorite for a list            |
-| /favs       | DELETE    | verifyToken()    | Delete a favorite for a list by favorite id |
-| /favs       | PUT       | verifyToken()    | Update a favorite by id
+| Route       | HTTP Verb | Route Middleware | Description                                 | body                     |
+| ----------- | --------- | ---------------- | ------------------------------------------  | -------------------------|
+| /user       | POST      |                  | Create a new user                           |{“email”: “email”,“password”: “string”}|
+| /user       | GET       | verifyToken()    | Get all information of all user             | |
+| /user/:id   | GET       | verifyToken()    | Get list for only one user by id            | |
+| /user/login | POST      |                  | Validate password and generate token        | {“username”: “email”,“password”: “text”}|
+| /list       | POST      | verifyToken()    | Create new list to user                     | {“name”: “string”,“iduser”: int}|
+| /list       | GET       | verifyToken()    | Get all list of every user                  | |
+| /list:id       | DELETE    | verifyToken()    | Delete a list by id                         | |
+| /favs       | POST      | verifyToken()    | Create a new favorite for a list            | {“title”: “string”,“description”: string,“link”: “string”,“idlist”: int} |
+| /favs:id       | DELETE    | verifyToken()    | Delete a favorite for a list by favorite id | |
+| /favs:id       | PUT       | verifyToken()    | Update a favorite by id                     | |
 
-Prior to any end point you must put the previously indicated URL of railway.
+Prior to any end point you must put the previously indicated URL of railway and in header have put de authorization Bearer and token.
 To cover the minimum requirements, you can do it in the end points as follows:
 ###	The system have to allow the following actions
 1.	Create a new list with a given name (auto-generate the unique id)
