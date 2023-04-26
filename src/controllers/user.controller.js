@@ -79,7 +79,7 @@ export const getListUser = async (req, res) => {
 
 // generate token
 export const generateToken = (req, res) => {
-  SECRET = "$2a$12$KzT39VZJef7fRta.o/WVrOUOEJVIdPhXXFHAEoEtn/IPrU6fvFqwi";
+  const SECRET = "$2a$12$KzT39VZJef7fRta.o/WVrOUOEJVIdPhXXFHAEoEtn/IPrU6fvFqwi";
   try {
     const { user } = req.body;
     const payload = { ...user };
