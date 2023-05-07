@@ -29,7 +29,7 @@ export const getAllInformation = async (req, res) => {
   try {
     const allInformation = await prisma.user.findMany({
       select: {
-        iduser,
+        iduser: true,
         email: true,
         list: {
           select: {
@@ -41,8 +41,9 @@ export const getAllInformation = async (req, res) => {
       },
     });
 
-    const computedData = allInformation.map(({ email, list }) => {
+    const computedData = allInformation.map(({ iduser, email, list }) => {
       return {
+        iduser,
         email,
         list,
       };
